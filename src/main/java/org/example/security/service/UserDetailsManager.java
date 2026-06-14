@@ -13,7 +13,7 @@ public interface UserDetailsManager extends UserDetailsService {
 
     void createUser(UserDetailsAdditional userDetailsAdditional) throws UserFoundException;
 
-    UserDtoResponse readUser(UUID id);
+    UserDtoResponse readUser(UUID id) throws UserNotFoundException;
 
     void updateUser(UserDetailsAdditional userDetailsAdditional) throws UserNotFoundException;
 
