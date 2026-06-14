@@ -40,7 +40,7 @@ public class UserController {
     @Operation(summary = "Чтение пользователя по id (с аутентификацией, только для ADMIN)")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/read/{id}")
-    public UserDtoResponse readUser(@PathVariable(name = "id") UUID id) {
+    public UserDtoResponse readUser(@PathVariable(name = "id") UUID id) throws UserNotFoundException {
         return userDetailsManager.readUser(id);
     }
 

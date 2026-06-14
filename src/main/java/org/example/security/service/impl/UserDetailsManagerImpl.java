@@ -49,8 +49,11 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     }
 
     @Override
-    public UserDtoResponse readUser(UUID id) {
+    public UserDtoResponse readUser(UUID id) throws UserNotFoundException {
         Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isEmpty()) {
+            throw new UserNotFoundException("Пользователь не найден");
+        }
         return userMapper.userToUserDtoResponse(optionalUser.get());
     }
 
@@ -85,7 +88,7 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (!optionalUser.isPresent()) {
-            return null;
+            throw new UsernameNotFoundException("Пользователь по имени не найден");
         }
         return new SecurityUser(optionalUser.get());
     }

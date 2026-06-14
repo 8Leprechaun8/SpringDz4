@@ -20,6 +20,9 @@ public class UserDtoResponse {
 
     private Set<UserRole> userRoleSet;
 
+    public UserDtoResponse() {
+    }
+
     public UserDtoResponse(
             UUID id,
             String username,
